@@ -27,13 +27,13 @@ pre{background:var(--code);color:#e5e7eb;padding:16px;border-radius:12px;overflo
 .sidebar-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.sidebar-title span{color:var(--muted);font-size:12px}.tab small{max-width:100%}
 @media(max-width:520px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{padding:0 10px}.hero{padding:18px}.card{padding:15px}.title{font-size:23px}}
 
-.image-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}.source-image{width:100%;max-height:430px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;cursor:zoom-in}.image-caption{font-size:12px;color:var(--muted);margin-top:5px;text-align:center}.image-note{font-size:12px;color:var(--muted);margin-top:10px}.section-desc{color:var(--muted);font-size:14px;line-height:1.7;margin:-4px 0 12px}.circuit-wrap{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px}.circuit-image{display:block;width:100%;max-height:620px;object-fit:contain;background:#fff;border-radius:10px;cursor:zoom-in;box-shadow:0 4px 16px rgba(15,23,42,.08)}.image-modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.88);z-index:9999;align-items:center;justify-content:center;padding:24px}.image-modal.show{display:flex}.image-modal img{max-width:96vw;max-height:94vh;width:auto;height:auto;object-fit:contain;background:white;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.45)}.image-modal .close{position:fixed;top:18px;right:22px;width:44px;height:44px;border:0;border-radius:50%;background:white;color:#111827;font-size:28px;line-height:44px;cursor:pointer}.image-modal .hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);color:white;font-size:13px;background:rgba(0,0,0,.45);padding:7px 12px;border-radius:999px}
+.image-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}.source-image{width:100%;max-height:430px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;cursor:zoom-in}.image-caption{font-size:12px;color:var(--muted);margin-top:5px;text-align:center}.image-note{font-size:12px;color:var(--muted);margin-top:10px}.image-modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.88);z-index:9999;align-items:center;justify-content:center;padding:24px}.image-modal.show{display:flex}.image-modal img{max-width:94vw;max-height:90vh;width:auto;height:auto;object-fit:contain;background:white;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.45)}.image-modal .close{position:fixed;top:18px;right:22px;width:44px;height:44px;border:0;border-radius:50%;background:white;color:#111827;font-size:28px;line-height:44px;cursor:pointer}.image-modal .hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);color:white;font-size:13px;background:rgba(0,0,0,.45);padding:7px 12px;border-radius:999px}
 </style>
 </head>
 <body>
 <header>
 <div class="header-inner">
-<div class="eyebrow">ARDUINO UNO CH340 · HIGH SCHOOL TEACHING</div>
+<div class="eyebrow">LIM YEAN SAN - ARDUINO UNO CH340 · PIN HWA HIGH SCHOOL TEACHING</div>
 <div class="title">Arduino 22 个项目互动教案｜含原教材图片</div>
 <p class="subtitle">左边切换项目；右边查看教学目标、材料、知识点、教学流程、代码与结果。内置搜索与复制代码功能。</p>
 <div class="toolbar"><input id="search" class="search" placeholder="搜索项目、元件、知识点……"></div>
@@ -75,13 +75,12 @@ function render(){
     <span class="badge">Project ${p.n} · ${p.tag} · ${p.level}</span>
     <h1>${p.title}</h1>
     <p>${p.goal}</p>
-    ${p.images&&p.images.length?`<div class="image-gallery">${p.images.map((src,i)=>`<div><img class="source-image" src="${src}" alt="Project ${p.n} 原教材图片 ${i+1}" onclick="openImage(this.src)"><div class="image-caption">原教材图片 ${i+1}</div></div>`).join('')}</div><div class="image-note">图片来自原始 LAFVIN Arduino UNO CH340 教材；点击图片可在当前页面放大查看。</div>`:''}
+    ${p.images&&p.images.length?`<div class="image-gallery">${p.images.map((src,i)=>`<div><img class="source-image" src="${src}" alt="Project ${p.n} 原教材图片 ${i+1}" onclick="openImage(this.src)"><div class="image-caption">原教材图片 ${i+1}</div></div>`).join('')}</div><div class="image-note">图片来自原始 LAFVIN Arduino UNO CH340 教材；点击图片可放大查看。</div>`:''}
   </section>
   <div class="grid">
     <section class="card full keypoints"><h2>⭐ 本项目文字重点</h2><ul>${p.keypoints.map(x=>'<li>'+x+'</li>').join('')}</ul></section>
     <section class="card"><h2>🎯 教学目标</h2><ul>${p.learn.map(x=>'<li>'+x+'</li>').join('')}</ul></section>
     <section class="card"><h2>🧰 硬件材料</h2><ul>${p.hardware.map(x=>'<li>'+x+'</li>').join('')}</ul></section>
-    ${p.circuit?`<section class="card full circuit-card"><h2>🔌 Circuit Connection｜电路接线</h2><p class="section-desc">以下为原始 LAFVIN 教材中的接线图。请学生先对照图确认电源、GND、元件与 Arduino 接脚，再开始接线。</p><div class="circuit-wrap"><img class="circuit-image" src="${p.circuit}" alt="Project ${p.n} Circuit Connection 电路接线图" onclick="openImage(this.src)"><div class="image-caption">${p.circuit_caption} · 点击图片放大</div></div></section>`:p.n===1?`<section class="card full circuit-card"><h2>🔌 Circuit Connection｜电路接线</h2><p class="section-desc">Project 1 主要使用 USB 连接 Arduino 与电脑，原教材没有另外提供面包板 Circuit Connection 图。</p></section>`:``}
     <section class="card full"><h2>🧑‍🏫 建议教学流程</h2><div class="flow">${p.flow.map(x=>'<div class="step">'+x+'</div>').join('')}</div></section>
     <section class="card full">
       <div class="code-head"><h2>💻 Arduino 程式</h2><button class="copy" onclick="copyCode()">复制代码</button></div>
